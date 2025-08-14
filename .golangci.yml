@@ -1,0 +1,24 @@
+run:
+  timeout: 5m
+  tests: true
+
+linters:
+  enable:
+    - govet
+    - staticcheck
+    - unused
+    - gocyclo
+    - errcheck
+    - gosimple
+    - ineffassign
+    - typecheck
+    - unparam
+    - gosec
+    - dupl
+    - revive
+
+linters-settings:
+  gocyclo:
+    min-complexity: 10
+  revive:
+    confidence: 0.8
