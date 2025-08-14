@@ -16,7 +16,17 @@ func NewWalletController(walletService _walletService.WalletService) *WalletCont
 func (c *WalletController) GetWallet(ctx *fiber.Ctx) error {
 	coin := ctx.Query("coin", "BTC")
 	symbol := ctx.Query("symbol", "THB_BTC")
-	resp, appErr := c.walletService.GetWallet(coin, symbol)
+
+	apiKey := ctx.Get("X-BITKUB-API-KEY")
+	apiSecret := ctx.Get("X-BITKUB-API-SECRET")
+	if apiKey == "" || apiSecret == "" {
+		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"success": false,
+			"message": "API key and secret are required",
+		})
+	}
+
+	resp, appErr := c.walletService.GetWallet(coin, symbol, apiKey, apiSecret)
 	if appErr != nil {
 		return appErr
 	}
