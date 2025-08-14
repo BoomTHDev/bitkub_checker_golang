@@ -6,5 +6,5 @@ import (
 )
 
 type WalletService interface {
-	GetWallet(coin, symbol string) (*_walletModel.WalletResponse, *custom.AppError)
+	GetWallet(coin, symbol, apiKey, apiSecret string) (*_walletModel.WalletResponse, *custom.AppError)
 }

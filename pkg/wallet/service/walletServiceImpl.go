@@ -19,7 +19,7 @@ func NewWalletService(walletRepository _walletRepository.WalletRepository) Walle
 	return &walletServiceImpl{walletRepository: walletRepository}
 }
 
-func (s *walletServiceImpl) GetWallet(coin, symbol string) (*_walletModel.WalletResponse, *custom.AppError) {
+func (s *walletServiceImpl) GetWallet(coin, symbol, apiKey, apiSecret string) (*_walletModel.WalletResponse, *custom.AppError) {
 	var (
 		b      []byte
 		err    error
@@ -38,7 +38,7 @@ func (s *walletServiceImpl) GetWallet(coin, symbol string) (*_walletModel.Wallet
 		return nil, custom.ErrIntervalServer("Failed to unmarchal json", err)
 	}
 	timestamp := strconv.FormatInt(ts, 10)
-	b, err = s.walletRepository.GetCoinPrice(timestamp, b)
+	b, err = s.walletRepository.GetCoinPrice(timestamp, apiKey, apiSecret, b)
 	if err != nil {
 		return nil, custom.ErrIntervalServer("Failed to get coin price", err)
 	}

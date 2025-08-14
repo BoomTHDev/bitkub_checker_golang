@@ -8,7 +8,7 @@ import (
 )
 
 func (s *fiberServer) initWalletRouter() {
-	walletRepository := _walletRepository.NewWalletRepositoryImpl(s.conf.Bitkub)
+	walletRepository := _walletRepository.NewWalletRepositoryImpl()
 	walletService := _walletService.NewWalletService(walletRepository)
 	walletController := _walletController.NewWalletController(walletService)
 

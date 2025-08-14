@@ -14,7 +14,7 @@ import (
 type (
 	Config struct {
 		Server *Server `validate:"required"`
-		Bitkub *Bitkub `validate:"required"`
+		// Bitkub *Bitkub `validate:"required"`
 	}
 
 	Server struct {
@@ -24,10 +24,10 @@ type (
 		TimeOut      time.Duration `validate:"required"`
 	}
 
-	Bitkub struct {
-		BitkubApiKey    string `validate:"required"`
-		BitkubApiSecret string `validate:"required"`
-	}
+	// Bitkub struct {
+	// 	BitkubApiKey    string `validate:"required"`
+	// 	BitkubApiSecret string `validate:"required"`
+	// }
 )
 
 var (
@@ -63,10 +63,10 @@ func ConfigGetting() *Config {
 			TimeOut:      timeOut,
 		}
 
-		configInstance.Bitkub = &Bitkub{
-			BitkubApiKey:    getEnv("BITKUB_API_KEY", ""),
-			BitkubApiSecret: getEnv("BITKUB_API_SECRET", ""),
-		}
+		// configInstance.Bitkub = &Bitkub{
+		// 	BitkubApiKey:    getEnv("BITKUB_API_KEY", ""),
+		// 	BitkubApiSecret: getEnv("BITKUB_API_SECRET", ""),
+		// }
 	})
 
 	validating := validator.New()
